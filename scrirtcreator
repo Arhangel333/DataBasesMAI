@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Создаем основную директорию
+mkdir -p lab2-database/init-scripts
+
+# Создаем файлы
+touch lab2-database/docker-compose.yml
+touch lab2-database/init-scripts/01-init.sql
+touch lab2-database/init-scripts/02-insert-data.sql
+touch lab2-database/init-scripts/03-dml-operations.sql
+touch lab2-database/init-scripts/04-aggregation-queries.sql
+touch lab2-database/init-scripts/05-join-queries.sql
+touch lab2-database/init-scripts/06-views.sql
+touch lab2-database/README.md
+
+echo "Структура создана:"
+echo "lab2-database/"
+echo "├── docker-compose.yml"
+echo "├── init-scripts/"
+echo "│   ├── 01-init.sql"
+echo "│   ├── 02-insert-data.sql"
+echo "│   ├── 03-dml-operations.sql"
+echo "│   ├── 04-aggregation-queries.sql"
+echo "│   ├── 05-join-queries.sql"
+echo "│   └── 06-views.sql"
+echo "└── README.md"
