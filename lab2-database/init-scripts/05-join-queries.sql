@@ -78,12 +78,12 @@ SELECT
     u.email,
     COUNT(DISTINCT o.order_id) as total_orders,
     COUNT(DISTINCT e.category_id) as categories_count,
-    GROUP_CONCAT(DISTINCT c.name) as preferred_categories,
+    STRING_AGG(DISTINCT c.name, ', ') as preferred_categories,
     SUM(o.order_total) as lifetime_value
 FROM Users u
 LEFT JOIN Orders o ON u.user_id = o.user_id AND o.status = 'completed'
 LEFT JOIN Events e ON o.event_id = e.event_id
 LEFT JOIN Categories c ON e.category_id = c.category_id
 GROUP BY u.user_id, user_name, u.email
-HAVING total_orders > 0
+HAVING COUNT(DISTINCT o.order_id) > 0
 ORDER BY lifetime_value DESC;

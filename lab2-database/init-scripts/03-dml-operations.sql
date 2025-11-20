@@ -18,7 +18,7 @@ WHERE ticket_type_id = 1 AND event_id = 1;
 
 -- Удаление определенной записи (отмена неоплаченного заказа)
 DELETE FROM Orders 
-WHERE status = 'pending' AND created_at < DATE_SUB(NOW(), INTERVAL 1 HOUR);
+WHERE status = 'pending' AND created_at < NOW() - INTERVAL '1 HOUR';
 
 -- Удаление пользователя (каскадное удаление связанных данных)
 DELETE FROM Users 

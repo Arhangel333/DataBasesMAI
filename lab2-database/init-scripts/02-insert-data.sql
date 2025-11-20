@@ -1,7 +1,4 @@
-# Создаем исправленную версию
-cat > init-scripts/02-insert-data-fixed.sql << 'EOF'
 -- Наполнение базы данных тестовыми данными
-
 -- Категории мероприятий
 INSERT INTO Categories (name, description, icon_url) VALUES
 ('Концерты', 'Музыкальные мероприятия и выступления', '/icons/concerts.png'),
@@ -41,7 +38,7 @@ INSERT INTO TicketTypes (event_id, name, description, price, quantity_available,
 
 -- Заказы
 INSERT INTO Orders (user_id, event_id, order_total, status, attendee_first_name, attendee_last_name, attendee_email, created_at) VALUES
-(4, 1, 3000.00, 'completed', 'Ольга', 'Кузнецова', 'olga.kuznetsova@email.com', '2024-04-15 10:30:00'),
+(4, 1, 3000.00, 'completed', 'Ольга', 'Кузнецова', 'olga.kuznetsova@email.com', '2023-04-15 10:30:00'),
 (5, 1, 5000.00, 'completed', 'Дмитрий', 'Воробьев', 'dmitry.vorobev@email.com', '2024-04-16 14:20:00'),
 (4, 2, 3000.00, 'completed', 'Ольга', 'Кузнецова', 'olga.kuznetsova@email.com', '2024-05-01 09:15:00'),
 (3, 3, 500.00, 'completed', 'Алексей', 'Смирнов', 'alex.smirnov@email.com', '2024-06-05 16:45:00');
@@ -52,4 +49,3 @@ INSERT INTO OrderItems (order_id, ticket_type_id, quantity, unit_price, line_tot
 (2, 3, 1, 5000.00, 5000.00),
 (3, 4, 1, 3000.00, 3000.00),
 (4, 5, 1, 500.00, 500.00);
-EOF

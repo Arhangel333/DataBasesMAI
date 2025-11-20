@@ -49,17 +49,17 @@ SELECT
 FROM Users u
 LEFT JOIN Orders o ON u.user_id = o.user_id AND o.status = 'completed'
 GROUP BY u.user_id, user_name
-HAVING total_orders > 0
+HAVING COUNT(o.order_id) > 0
 ORDER BY total_spent DESC;
 
 -- 5. Ежемесячная статистика продаж
 SELECT 
-    YEAR(o.created_at) as year,
-    MONTH(o.created_at) as month,
+    EXTRACT(YEAR FROM o.created_at) as year,
+    EXTRACT(MONTH FROM o.created_at) as month,
     COUNT(o.order_id) as orders_count,
     SUM(o.order_total) as monthly_revenue,
     COUNT(DISTINCT o.user_id) as unique_customers
 FROM Orders o
 WHERE o.status = 'completed'
-GROUP BY YEAR(o.created_at), MONTH(o.created_at)
+GROUP BY EXTRACT(YEAR FROM o.created_at), EXTRACT(MONTH FROM o.created_at)
 ORDER BY year DESC, month DESC;
