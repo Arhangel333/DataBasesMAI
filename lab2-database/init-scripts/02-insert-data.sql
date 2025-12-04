@@ -5,7 +5,8 @@ INSERT INTO Categories (name, description, icon_url) VALUES
 ('Воркшопы', 'Обучающие семинары и мастер-классы', '/icons/workshops.png'),
 ('Встречи', 'Нетворкинг и бизнес-встречи', '/icons/meetups.png'),
 ('Спорт', 'Спортивные мероприятия и соревнования', '/icons/sports.png'),
-('Искусство', 'Выставки и культурные события', '/icons/art.png');
+('Искусство', 'Выставки и культурные события', '/icons/art.png')
+ON CONFLICT (name) DO NOTHING;
 
 -- Пользователи
 INSERT INTO Users (email, password_hash, first_name, last_name, phone_number, date_of_birth) VALUES
@@ -13,7 +14,8 @@ INSERT INTO Users (email, password_hash, first_name, last_name, phone_number, da
 ('maria.ivanova@email.com', 'hash2', 'Мария', 'Иванова', '+79162345678', '1985-08-22'),
 ('alex.smirnov@email.com', 'hash3', 'Алексей', 'Смирнов', '+79163456789', '1992-12-10'),
 ('olga.kuznetsova@email.com', 'hash4', 'Ольга', 'Кузнецова', '+79164567890', '1988-03-30'),
-('dmitry.vorobev@email.com', 'hash5', 'Дмитрий', 'Воробьев', '+79165678901', '1995-07-18');
+('dmitry.vorobev@email.com', 'hash5', 'Дмитрий', 'Воробьев', '+79165678901', '1995-07-18')
+ON CONFLICT (email) DO NOTHING;
 
 -- Организаторы
 INSERT INTO Organizers (user_id, company_name, description, website_url, is_verified) VALUES
@@ -43,9 +45,17 @@ INSERT INTO Orders (user_id, event_id, order_total, status, attendee_first_name,
 (4, 2, 3000.00, 'completed', 'Ольга', 'Кузнецова', 'olga.kuznetsova@email.com', '2024-05-01 09:15:00'),
 (3, 3, 500.00, 'completed', 'Алексей', 'Смирнов', 'alex.smirnov@email.com', '2024-06-05 16:45:00');
 
--- Элементы заказов (ИСПРАВЛЕННАЯ ЧАСТЬ)
+-- Элементы заказов
 INSERT INTO OrderItems (order_id, ticket_type_id, quantity, unit_price, line_total) VALUES
 (1, 1, 2, 1500.00, 3000.00),
 (2, 3, 1, 5000.00, 5000.00),
 (3, 4, 1, 3000.00, 3000.00),
 (4, 5, 1, 500.00, 500.00);
+
+-- Элементы Оплаты
+INSERT INTO Payments (order_id, amount, payment_method, status) VALUES
+(1, 1000, 'card', 'succeeded'),
+(2, 3000, 'card', 'succeeded'),
+(3, 4000, 'card', 'succeeded'),
+(4, 5000, 'card', 'succeeded')
+ON CONFLICT (order_id) DO NOTHING;

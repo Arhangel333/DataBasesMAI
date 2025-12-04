@@ -125,14 +125,3 @@ CREATE TABLE Payments (
     status VARCHAR(20) CHECK (status IN ('pending', 'succeeded', 'failed', 'refunded')) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
--- Создание индексов для улучшения производительности
-CREATE INDEX idx_events_organizer ON Events(organizer_id);
-CREATE INDEX idx_events_category ON Events(category_id);
-CREATE INDEX idx_events_datetime ON Events(start_datetime, end_datetime);
-CREATE INDEX idx_ticket_types_event ON TicketTypes(event_id);
-CREATE INDEX idx_orders_user ON Orders(user_id);
-CREATE INDEX idx_orders_event ON Orders(event_id);
-CREATE INDEX idx_tickets_event ON Tickets(event_id);
-CREATE INDEX idx_tickets_user ON Tickets(user_id);
-CREATE INDEX idx_tickets_uuid ON Tickets(ticket_uuid);

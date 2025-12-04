@@ -11,6 +11,10 @@ UPDATE Events
 SET status = 'published', published_at = NOW() 
 WHERE event_id = 4;
 
+UPDATE Events 
+SET status = 'completed', published_at = NOW() 
+WHERE event_id IN (1, 2, 3, 4);
+
 -- Обновление цены билета
 UPDATE TicketTypes 
 SET price = 1700.00 
